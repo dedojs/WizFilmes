@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace WizFilmes.Domain.Entidades
 {
     public class Person
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public UserType Type { get; set; }
-        public IEnumerable<Film> Films { get; set; }
+        public virtual IEnumerable<Film> Films { get; set; }
     }
 }
