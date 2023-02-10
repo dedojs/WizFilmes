@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WizFilmes.Infra.Data.Context;
 using WizFilmes.Infra.Data.Repository.UserRepository;
 using WizFilmes.Infra.Services.LoginServices;
+using WizFilmes.Infra.Services.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
 // Add Services
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 // Add Mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

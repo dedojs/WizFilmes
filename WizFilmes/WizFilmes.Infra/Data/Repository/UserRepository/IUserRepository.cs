@@ -11,5 +11,9 @@ namespace WizFilmes.Infra.Data.Repository.UserRepository
     {
         Task<IEnumerable<User>> GetUsers();
         Task<User> CreateUser(User user);
+        Task<User> GetUserById(int id);
+        Task<User> GetUserByEmail(string email);
+        Task UpdateUser(User user);
+        Task DeleteUser(User user);
     }
 }

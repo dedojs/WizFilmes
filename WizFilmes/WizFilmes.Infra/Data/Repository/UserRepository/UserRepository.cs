@@ -25,10 +25,45 @@ namespace WizFilmes.Infra.Data.Repository.UserRepository
             return user;
         }
 
+        public async Task DeleteUser(User user)
+        {
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<User>> GetUsers()
         {
             return await _context.Users.ToListAsync();
 
+        }
+
+        public async Task UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserById(int id)
+        {
+            var user = await _context.Users
+                .AsNoTracking()
+                .Include(r => r.Reviews)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+                return null;
+
+            return user;
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null)
+                return null;
+
+            return user;
         }
         
     }

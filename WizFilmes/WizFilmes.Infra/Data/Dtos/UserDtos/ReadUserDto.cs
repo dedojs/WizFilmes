@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WizFilmes.Domain.Models;
 
-namespace WizFilmes.Domain.Entidades
+namespace WizFilmes.Infra.Data.Dtos.UserDtos
 {
-    public class Person
+    public class ReadUserDto
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        [JsonIgnore]
-        public virtual IEnumerable<Film> Films { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
     }
 }
