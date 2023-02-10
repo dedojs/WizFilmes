@@ -20,7 +20,7 @@ namespace WizFilmes.Infra.Data.Context
         {
             optionsBuilder.UseSqlServer(
                 @"Server=127.0.0.1;Database=WizFilmes;User=sa;Password=Password12!;TrustServerCertificate=True",
-                b => b.MigrationsAssembly("WizFilmes.Api")
+                b => b.MigrationsAssembly("WizFilmes.Infra")
             ).UseLazyLoadingProxies();
         }
 
