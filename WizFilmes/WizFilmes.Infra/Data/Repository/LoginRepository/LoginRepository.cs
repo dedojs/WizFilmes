@@ -9,27 +9,23 @@ using WizFilmes.Infra.Data.Context;
 
 namespace WizFilmes.Infra.Data.Repository.UserRepository
 {
-    public class UserRepository : IUserRepository
+    public class LoginRepository : ILoginRepository
     {
         private readonly AppDbContext _context;
 
-        public UserRepository(AppDbContext context)
+        public LoginRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<User> CreateUser(User user)
+        public async Task<User> LoginUser(User userLogin)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(t => t.Email == userLogin.Email && t.Password == userLogin.Password);
+
+            if (user == null)
+                return null;
+
             return user;
         }
-
-        public async Task<IEnumerable<User>> GetUsers()
-        {
-            return await _context.Users.ToListAsync();
-
-        }
-        
     }
 }

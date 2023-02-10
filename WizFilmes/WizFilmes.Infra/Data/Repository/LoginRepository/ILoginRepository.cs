@@ -7,9 +7,8 @@ using WizFilmes.Domain.Models;
 
 namespace WizFilmes.Infra.Data.Repository.UserRepository
 {
-    public interface IUserRepository
+    public interface ILoginRepository
     {
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> CreateUser(User user);
+        Task<User> LoginUser(User user);
     }
 }
