@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizFilmes.Api", "WizFilmes.Api\WizFilmes.Api.csproj", "{B70E758E-C973-451C-A19E-E91877842619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizFilmes.Domain", "WizFilmes.Domain\WizFilmes.Domain.csproj", "{F2C610EB-6BF2-45DF-8AEC-70FF17240CA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizFilmes.Infra", "WizFilmes.Infra\WizFilmes.Infra.csproj", "{4273A721-BC3E-4D35-AD3F-8C0A978D421C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizFilmes.Tests", "WizFilmes.Tests\WizFilmes.Tests.csproj", "{CC77D243-31DA-4465-92DB-B5A16C747007}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B70E758E-C973-451C-A19E-E91877842619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70E758E-C973-451C-A19E-E91877842619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70E758E-C973-451C-A19E-E91877842619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70E758E-C973-451C-A19E-E91877842619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C610EB-6BF2-45DF-8AEC-70FF17240CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C610EB-6BF2-45DF-8AEC-70FF17240CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C610EB-6BF2-45DF-8AEC-70FF17240CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C610EB-6BF2-45DF-8AEC-70FF17240CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4273A721-BC3E-4D35-AD3F-8C0A978D421C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4273A721-BC3E-4D35-AD3F-8C0A978D421C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4273A721-BC3E-4D35-AD3F-8C0A978D421C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4273A721-BC3E-4D35-AD3F-8C0A978D421C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC77D243-31DA-4465-92DB-B5A16C747007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC77D243-31DA-4465-92DB-B5A16C747007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC77D243-31DA-4465-92DB-B5A16C747007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC77D243-31DA-4465-92DB-B5A16C747007}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7E71ADD-1558-42B8-8ED9-829B712408C0}
+	EndGlobalSection
+EndGlobal
