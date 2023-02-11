@@ -24,6 +24,7 @@ namespace WizFilmes.Domain.Models
         public virtual Category Category { get; set; }
         public virtual IEnumerable<Review> Reviews { get; set; }
         public double Rating { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<FilmActor> Cast { get; set; }
     }
 }
