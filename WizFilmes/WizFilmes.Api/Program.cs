@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WizFilmes.Infra.Data.Context;
+using WizFilmes.Infra.Data.Repository.ReviewRepository;
 using WizFilmes.Infra.Data.Repository.UserRepository;
 using WizFilmes.Infra.Services.LoginServices;
+using WizFilmes.Infra.Services.ReviewServices;
 using WizFilmes.Infra.Services.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,10 +17,13 @@ builder.Services.AddDbContext<AppDbContext>();
 // Add Repositorys
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 // Add Services
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
 
 
 // Add Mapper
