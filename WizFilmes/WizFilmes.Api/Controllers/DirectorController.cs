@@ -33,17 +33,6 @@ namespace WizFilmes.Api.Controllers
             return Ok(director);
         }
 
-        //[HttpGet("/name{name}")]
-        //public async Task<IActionResult> GetDirectorByName(string name)
-        //{
-        //    var director = await _service.GetDirectorByName(name);
-
-        //    if (director == null)
-        //        return NotFound("Diretor não localizado");
-
-        //    return Ok(director);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> CreateDirector([FromBody] CreateDirectorDto createDirectorDto)
         {
@@ -55,7 +44,6 @@ namespace WizFilmes.Api.Controllers
             if (director == null)
                 return BadRequest("Diretor já existe");
 
-            //return CreatedAtAction(nameof(GetDirectorByName), new { name = director.Name }, director);
             return Ok(director);
         }
 
