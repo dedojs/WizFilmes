@@ -9,6 +9,6 @@ namespace WizFilmes.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual IEnumerable<FilmActor> Films { get; set; }
-        public string Character { get; set; }
+        public string? Character { get; set; }
     }
 }
