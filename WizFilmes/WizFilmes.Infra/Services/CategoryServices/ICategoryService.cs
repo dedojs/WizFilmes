@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Dtos.CategoryDtos;
 
-namespace WizFilmes.Infra.Data.Repository.ActorRepository
+namespace WizFilmes.Infra.Services.CategoryServices
 {
-    public interface ICategoryRepository
+    public interface ICategoryService
     {
         Task<IEnumerable<CategoryDto>> GetAllCategories();
         Task<IEnumerable<CategoryDto>> GetCategoryById(int id);
-        Task<Category> CreateCategory(Category category);
+        Task<CategoryDto> CreateCategory(CreateCategoryDto createCategoryDto);
     }
 }

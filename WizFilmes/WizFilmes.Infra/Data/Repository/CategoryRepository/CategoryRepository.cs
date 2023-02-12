@@ -1,40 +1,56 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Context;
+using WizFilmes.Infra.Data.Dtos.CategoryDtos;
+using WizFilmes.Infra.Data.Dtos.DirectorDtos;
 
 namespace WizFilmes.Infra.Data.Repository.ActorRepository
 {
-    public class ActorRepository : IActorRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly AppDbContext _context;
 
-        public ActorRepository(AppDbContext context)
+        public CategoryRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Actor> CreateActor(Actor actor)
+        public async Task<Category> CreateCategory(Category category)
         {
-            _context.Actors.Add(actor);
+            _context.Categories.Add(category);
             await _context.SaveChangesAsync();
-            return actor;
+            return category;
         }
 
-        public async Task<IEnumerable<Actor>> GetActorByName(string name)
+        public async Task<IEnumerable<CategoryDto>> GetAllCategories()
         {
-            var actor = await _context.Actors
-                //.Include(x => x.Films)
-                .Where(a => a.Name.ToLower().Contains(name.ToLower()))
+            var categories = await _context.Categories
+                .Include(x => x.Films)
+                .Select(d => new CategoryDto
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Films = d.Films.Select(f => f.Name).ToList()
+                })
                 .ToListAsync();
 
-            return actor;
+            return categories;
         }
 
-        public async Task<IEnumerable<Actor>> GetAllActors()
+        public async Task<IEnumerable<CategoryDto>> GetCategoryById(int id)
         {
-            return await _context.Actors
-                //.Include(f => f.Films)
+            var categories = await _context.Categories
+                .Include(x => x.Films)
+                .Where(x => x.Id == id)
+                .Select(d => new CategoryDto
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Films = d.Films.Select(f => f.Name).ToList()
+                })
                 .ToListAsync();
+
+            return categories;
         }
     }
 }
