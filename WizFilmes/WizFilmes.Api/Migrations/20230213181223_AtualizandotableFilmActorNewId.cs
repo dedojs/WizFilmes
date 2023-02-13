@@ -4,7 +4,7 @@
 
 namespace WizFilmes.Api.Migrations
 {
-    public partial class inicial : Migration
+    public partial class AtualizandotableFilmActorNewId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace WizFilmes.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Character = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Character = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,7 +75,6 @@ namespace WizFilmes.Api.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     DirectorId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<double>(type: "float", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -104,12 +103,14 @@ namespace WizFilmes.Api.Migrations
                 name: "FilmsActor",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ActorId = table.Column<int>(type: "int", nullable: false),
                     FilmId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FilmsActor", x => new { x.FilmId, x.ActorId });
+                    table.PrimaryKey("PK_FilmsActor", x => x.Id);
                     table.ForeignKey(
                         name: "FK_FilmsActor_Actors_FilmId",
                         column: x => x.FilmId,
@@ -197,29 +198,29 @@ namespace WizFilmes.Api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Films",
-                columns: new[] { "Id", "CategoryId", "Description", "DirectorId", "Name", "Rating", "UserId", "Year" },
+                columns: new[] { "Id", "CategoryId", "Description", "DirectorId", "Name", "UserId", "Year" },
                 values: new object[,]
                 {
-                    { 1, 1, "Filme do Indiana", 1, "Indiana Jones e a Caveira de Cristal", 0.0, null, 1980 },
-                    { 2, 1, "Filme da Lara Croft", 2, "Tomb Raider", 0.0, null, 2000 },
-                    { 3, 1, "Filme da DC", 2, "Mulher Maravilha", 0.0, null, 2020 },
-                    { 4, 3, "Filme do ET", 1, "ET", 0.0, null, 1980 },
-                    { 5, 4, "Filme do avião", 1, "Maverick", 0.0, null, 2023 },
-                    { 6, 5, "Filme dos Ocean", 2, "Oito Mulheres e um segredo", 0.0, null, 2018 },
-                    { 7, 2, "Filme do capiroto", 1, "Exorcista", 0.0, null, 1978 }
+                    { 1, 1, "Filme do Indiana", 1, "Indiana Jones e a Caveira de Cristal", null, 1980 },
+                    { 2, 1, "Filme da Lara Croft", 2, "Tomb Raider", null, 2000 },
+                    { 3, 1, "Filme da DC", 2, "Mulher Maravilha", null, 2020 },
+                    { 4, 3, "Filme do ET", 1, "ET", null, 1980 },
+                    { 5, 4, "Filme do avião", 1, "Maverick", null, 2023 },
+                    { 6, 5, "Filme dos Ocean", 2, "Oito Mulheres e um segredo", null, 2018 },
+                    { 7, 2, "Filme do capiroto", 1, "Exorcista", null, 1978 }
                 });
 
             migrationBuilder.InsertData(
                 table: "FilmsActor",
-                columns: new[] { "ActorId", "FilmId" },
+                columns: new[] { "Id", "ActorId", "FilmId" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 5, 2 },
-                    { 4, 3 },
-                    { 3, 4 },
-                    { 2, 5 },
-                    { 6, 6 }
+                    { 1, 1, 1 },
+                    { 2, 5, 2 },
+                    { 3, 4, 3 },
+                    { 4, 3, 4 },
+                    { 5, 2, 5 },
+                    { 6, 6, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -250,6 +251,11 @@ namespace WizFilmes.Api.Migrations
                 name: "IX_FilmsActor_ActorId",
                 table: "FilmsActor",
                 column: "ActorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FilmsActor_FilmId",
+                table: "FilmsActor",
+                column: "FilmId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_FilmId",

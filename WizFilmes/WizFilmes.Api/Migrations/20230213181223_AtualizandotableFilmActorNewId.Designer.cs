@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WizFilmes.Infra.Data.Context;
 
@@ -11,9 +12,10 @@ using WizFilmes.Infra.Data.Context;
 namespace WizFilmes.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230213181223_AtualizandotableFilmActorNewId")]
+    partial class AtualizandotableFilmActorNewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -437,14 +439,14 @@ namespace WizFilmes.Api.Migrations
 
             modelBuilder.Entity("WizFilmes.Domain.Models.FilmActor", b =>
                 {
-                    b.HasOne("WizFilmes.Domain.Models.Actor", "Actor")
-                        .WithMany("Films")
+                    b.HasOne("WizFilmes.Domain.Models.Film", "Film")
+                        .WithMany("Cast")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WizFilmes.Domain.Models.Film", "Film")
-                        .WithMany("Cast")
+                    b.HasOne("WizFilmes.Domain.Models.Actor", "Actor")
+                        .WithMany("Films")
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
