@@ -7,7 +7,6 @@ namespace WizFilmes.Infra.Data.Context
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
         public DbSet<User> Users { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Director> Directors { get; set; }
@@ -20,7 +19,7 @@ namespace WizFilmes.Infra.Data.Context
         {
             optionsBuilder.UseSqlServer(
                 @"Server=127.0.0.1;Database=WizFilmes;User=sa;Password=Password12!;TrustServerCertificate=True",
-                b => b.MigrationsAssembly("WizFilmes.Infra")
+                b => b.MigrationsAssembly("WizFilmes.Api")
             ).UseLazyLoadingProxies();
         }
 
@@ -48,18 +47,18 @@ namespace WizFilmes.Infra.Data.Context
                 .WithOne(u => u.Category)
                 .HasForeignKey(f => f.CategoryId);
 
-            modelBuilder.Entity<FilmActor>()
-                .HasKey(af => new { af.FilmId, af.ActorId });
+            //modelBuilder.Entity<FilmActor>()
+            //    .HasKey(af => new { af.FilmId, af.ActorId });
 
             modelBuilder.Entity<FilmActor>()
                 .HasOne(af => af.Actor)
                 .WithMany(a => a.Films)
-                .HasForeignKey(af => af.FilmId);
+                .HasForeignKey(af => af.ActorId);
 
             modelBuilder.Entity<FilmActor>()
                 .HasOne(af => af.Film)
                 .WithMany(f => f.Cast)
-                .HasForeignKey(af => af.ActorId);
+                .HasForeignKey(af => af.FilmId);
 
             // Populando o banco de dados
             modelBuilder.Entity<User>()
@@ -106,12 +105,12 @@ namespace WizFilmes.Infra.Data.Context
 
             modelBuilder.Entity<FilmActor>()
                 .HasData(
-                new FilmActor { FilmId = 1, ActorId = 1 },
-                new FilmActor { FilmId = 2, ActorId = 5 },
-                new FilmActor { FilmId = 3, ActorId = 4 },
-                new FilmActor { FilmId = 4, ActorId = 3 },
-                new FilmActor { FilmId = 5, ActorId = 2 },
-                new FilmActor { FilmId = 6, ActorId = 6 }
+                new FilmActor { Id = 1, FilmId = 1, ActorId = 1 },
+                new FilmActor { Id = 2, FilmId = 2, ActorId = 5 },
+                new FilmActor { Id = 3, FilmId = 3, ActorId = 4 },
+                new FilmActor { Id = 4, FilmId = 4, ActorId = 3 },
+                new FilmActor { Id = 5, FilmId = 5, ActorId = 2 },
+                new FilmActor { Id = 6, FilmId = 6, ActorId = 6 }
                 );
 
             modelBuilder.Entity<Review>()

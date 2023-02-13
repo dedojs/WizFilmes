@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using WizFilmes.Domain.Models;
 
-namespace WizFilmes.Domain.Models
+namespace WizFilmes.Infra.Data.Dtos.FilmDtos
 {
-    public class Film
+    public class FilmDto
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -23,11 +21,21 @@ namespace WizFilmes.Domain.Models
         [JsonIgnore]
         public virtual Category Category { get; set; }
         public virtual IEnumerable<Review> Reviews { get; set; }
-        public double Rating { get; }
+        public double Rating
+        {
+            get
+            {
+                if (Reviews.Any())
+                {
+                    return Math.Round(Reviews.Average(x => x.Rating), 2);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
         [JsonIgnore]
         public virtual IEnumerable<FilmActor> Cast { get; set; }
-        
     }
-
-    
 }

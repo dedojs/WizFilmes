@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using WizFilmes.Domain.Models;
 
-namespace WizFilmes.Domain.Models
+namespace WizFilmes.Infra.Data.Dtos.FilmActorDtos
 {
-    public class FilmActor
+    public class FilmActorDto
     {
-        [Key]
         public int Id { get; set; }
         public int ActorId { get; set; }
         [JsonIgnore]

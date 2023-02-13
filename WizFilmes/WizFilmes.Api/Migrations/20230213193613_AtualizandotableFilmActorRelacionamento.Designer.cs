@@ -12,8 +12,8 @@ using WizFilmes.Infra.Data.Context;
 namespace WizFilmes.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230210194539_inicial")]
-    partial class inicial
+    [Migration("20230213193613_AtualizandotableFilmActorRelacionamento")]
+    partial class AtualizandotableFilmActorRelacionamento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,6 @@ namespace WizFilmes.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Character")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -178,9 +177,6 @@ namespace WizFilmes.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
@@ -205,7 +201,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme do Indiana",
                             DirectorId = 1,
                             Name = "Indiana Jones e a Caveira de Cristal",
-                            Rating = 0.0,
                             Year = 1980
                         },
                         new
@@ -215,7 +210,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme da Lara Croft",
                             DirectorId = 2,
                             Name = "Tomb Raider",
-                            Rating = 0.0,
                             Year = 2000
                         },
                         new
@@ -225,7 +219,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme da DC",
                             DirectorId = 2,
                             Name = "Mulher Maravilha",
-                            Rating = 0.0,
                             Year = 2020
                         },
                         new
@@ -235,7 +228,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme do ET",
                             DirectorId = 1,
                             Name = "ET",
-                            Rating = 0.0,
                             Year = 1980
                         },
                         new
@@ -245,7 +237,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme do avião",
                             DirectorId = 1,
                             Name = "Maverick",
-                            Rating = 0.0,
                             Year = 2023
                         },
                         new
@@ -255,7 +246,6 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme dos Ocean",
                             DirectorId = 2,
                             Name = "Oito Mulheres e um segredo",
-                            Rating = 0.0,
                             Year = 2018
                         },
                         new
@@ -265,55 +255,68 @@ namespace WizFilmes.Api.Migrations
                             Description = "Filme do capiroto",
                             DirectorId = 1,
                             Name = "Exorcista",
-                            Rating = 0.0,
                             Year = 1978
                         });
                 });
 
             modelBuilder.Entity("WizFilmes.Domain.Models.FilmActor", b =>
                 {
-                    b.Property<int>("FilmId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("ActorId")
                         .HasColumnType("int");
 
-                    b.HasKey("FilmId", "ActorId");
+                    b.Property<int>("FilmId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ActorId");
+
+                    b.HasIndex("FilmId");
 
                     b.ToTable("FilmsActor");
 
                     b.HasData(
                         new
                         {
-                            FilmId = 1,
-                            ActorId = 1
+                            Id = 1,
+                            ActorId = 1,
+                            FilmId = 1
                         },
                         new
                         {
-                            FilmId = 2,
-                            ActorId = 5
+                            Id = 2,
+                            ActorId = 5,
+                            FilmId = 2
                         },
                         new
                         {
-                            FilmId = 3,
-                            ActorId = 4
+                            Id = 3,
+                            ActorId = 4,
+                            FilmId = 3
                         },
                         new
                         {
-                            FilmId = 4,
-                            ActorId = 3
+                            Id = 4,
+                            ActorId = 3,
+                            FilmId = 4
                         },
                         new
                         {
-                            FilmId = 5,
-                            ActorId = 2
+                            Id = 5,
+                            ActorId = 2,
+                            FilmId = 5
                         },
                         new
                         {
-                            FilmId = 6,
-                            ActorId = 6
+                            Id = 6,
+                            ActorId = 6,
+                            FilmId = 6
                         });
                 });
 
@@ -436,14 +439,14 @@ namespace WizFilmes.Api.Migrations
 
             modelBuilder.Entity("WizFilmes.Domain.Models.FilmActor", b =>
                 {
-                    b.HasOne("WizFilmes.Domain.Models.Film", "Film")
-                        .WithMany("Cast")
+                    b.HasOne("WizFilmes.Domain.Models.Actor", "Actor")
+                        .WithMany("Films")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WizFilmes.Domain.Models.Actor", "Actor")
-                        .WithMany("Films")
+                    b.HasOne("WizFilmes.Domain.Models.Film", "Film")
+                        .WithMany("Cast")
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
