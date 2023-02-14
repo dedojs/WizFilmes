@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Dtos.FilmDtos;
 using WizFilmes.Infra.Data.Repository.FilmRepositorys;
@@ -17,7 +18,7 @@ namespace WizFilmes.Infra.Services.FilmServices
 
         public async Task<FilmDto> CreateFilm(CreateFilmDto createFilmDto)
         {
-            var listFilms = await _repository.GetAllFilms(0, 0, string.Empty);
+            var listFilms = await _repository.GetAllFilms(null, null, string.Empty);
             var findFime = listFilms.Film.Where(f => f.Name.ToLower() == createFilmDto.Name.ToLower());
 
             if (findFime.Any())
@@ -40,12 +41,15 @@ namespace WizFilmes.Infra.Services.FilmServices
             return true;
         }
 
-        public async Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name)
+        public async Task<FilmResultDtoCountPages> GetAllFilms(int? row, int? page, string? name)
         {
             var listFilms = await _repository.GetAllFilms(row, page, name);
 
-            //var listFilmsDto = listFilms.Film.Select(f => _mapper.Map<FilmDto>(f)).ToList();
-            return listFilms;
+            var listFilmsDto = listFilms.Film.Select(f => _mapper.Map<FilmDto>(f)).ToList();
+
+            var newListResultDto = new FilmResultDtoCountPages() { Films = listFilmsDto, Count = listFilms.Count, Pages = listFilms.Pages };
+
+            return newListResultDto;
         }
 
         public async Task<FilmDto> GetFilmById(int id)
