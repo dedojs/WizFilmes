@@ -13,6 +13,9 @@ namespace WizFilmes.Infra.Data.Dtos.FilmActorDtos
         [Required]
         public int ActorId { get; set; }
         [Required]
+        [StringLength(20, MinimumLength = 5, ErrorMessage = "O Papel deve ter no mínimo 5 e no máximo 20 caracteres")]
+        public string Character { get; set; }
+        [Required]
         public int FilmId { get; set; }
     }
 }

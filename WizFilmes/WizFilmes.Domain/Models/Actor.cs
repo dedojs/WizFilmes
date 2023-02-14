@@ -11,6 +11,6 @@ namespace WizFilmes.Domain.Models
         public string Name { get; set; }
         [JsonIgnore]
         public virtual IEnumerable<FilmActor> Films { get; set; }
-        public string? Character { get; set; }
+        //public string? Character { get; set; }
     }
 }

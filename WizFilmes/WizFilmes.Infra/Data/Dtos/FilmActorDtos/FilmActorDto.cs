@@ -14,7 +14,7 @@ namespace WizFilmes.Infra.Data.Dtos.FilmActorDtos
         public int ActorId { get; set; }
         [JsonIgnore]
         public virtual Actor Actor { get; set; }
-
+        public string Character { get; set; }
         public int FilmId { get; set; }
         [JsonIgnore]
         public virtual Film Film { get; set; }

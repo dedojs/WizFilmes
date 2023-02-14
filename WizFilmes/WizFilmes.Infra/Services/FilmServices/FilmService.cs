@@ -17,8 +17,8 @@ namespace WizFilmes.Infra.Services.FilmServices
 
         public async Task<FilmDto> CreateFilm(CreateFilmDto createFilmDto)
         {
-            var listFilms = await _repository.GetAllFilms(string.Empty);
-            var findFime = listFilms.Where(f => f.Name.ToLower() == createFilmDto.Name.ToLower());
+            var listFilms = await _repository.GetAllFilms(0, 0, string.Empty);
+            var findFime = listFilms.Film.Where(f => f.Name.ToLower() == createFilmDto.Name.ToLower());
 
             if (findFime.Any())
                 return null;
@@ -40,12 +40,12 @@ namespace WizFilmes.Infra.Services.FilmServices
             return true;
         }
 
-        public async Task<IEnumerable<FilmDto>> GetAllFilms(string? name)
+        public async Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name)
         {
-            var listFilms = await _repository.GetAllFilms(name);
+            var listFilms = await _repository.GetAllFilms(row, page, name);
 
-            var listFilmsDto = listFilms.Select(f => _mapper.Map<FilmDto>(f)).ToList();
-            return listFilmsDto;
+            //var listFilmsDto = listFilms.Film.Select(f => _mapper.Map<FilmDto>(f)).ToList();
+            return listFilms;
         }
 
         public async Task<FilmDto> GetFilmById(int id)
@@ -63,6 +63,7 @@ namespace WizFilmes.Infra.Services.FilmServices
                 return false;
 
             var filmUpdate = _mapper.Map(createFilmDto, film);
+            
             await _repository.UpdateFilm(filmUpdate);
 
             return true;

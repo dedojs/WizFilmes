@@ -95,22 +95,22 @@ namespace WizFilmes.Infra.Data.Context
 
             modelBuilder.Entity<Actor>()
                 .HasData(
-                new Actor { Id = 1, Name = "Harison Ford", Character = "Indiana Jones" },
-                new Actor { Id = 2, Name = "Tom Cruise", Character = "Maverick" },
-                new Actor { Id = 3, Name = "Tom Hanks", Character = " Capitão John H. Miller " },
-                new Actor { Id = 4, Name = "Gal Gadot", Character = "Mulher Maravilha" },
-                new Actor { Id = 5, Name = "Angelina Jolie", Character = "Lara Croft" },
-                new Actor { Id = 6, Name = "Sandra Bullock", Character = "Debbie Ocean" }
+                new Actor { Id = 1, Name = "Harison Ford"},
+                new Actor { Id = 2, Name = "Tom Cruise"},
+                new Actor { Id = 3, Name = "Tom Hanks"},
+                new Actor { Id = 4, Name = "Gal Gadot"},
+                new Actor { Id = 5, Name = "Angelina Jolie"},
+                new Actor { Id = 6, Name = "Sandra Bullock"}
                 );
 
             modelBuilder.Entity<FilmActor>()
                 .HasData(
-                new FilmActor { Id = 1, FilmId = 1, ActorId = 1 },
-                new FilmActor { Id = 2, FilmId = 2, ActorId = 5 },
-                new FilmActor { Id = 3, FilmId = 3, ActorId = 4 },
-                new FilmActor { Id = 4, FilmId = 4, ActorId = 3 },
-                new FilmActor { Id = 5, FilmId = 5, ActorId = 2 },
-                new FilmActor { Id = 6, FilmId = 6, ActorId = 6 }
+                new FilmActor { Id = 1, FilmId = 1, ActorId = 1, Character = "Jiraya" },
+                new FilmActor { Id = 2, FilmId = 2, ActorId = 5, Character = "Maverick"},
+                new FilmActor { Id = 3, FilmId = 3, ActorId = 4, Character = "Capitao do soldado Ryan"},
+                new FilmActor { Id = 4, FilmId = 4, ActorId = 3, Character = "Mulher maravilha"},
+                new FilmActor { Id = 5, FilmId = 5, ActorId = 2, Character = "Lara Croft"},
+                new FilmActor { Id = 6, FilmId = 6, ActorId = 6, Character = "Ocean sister" }
                 );
 
             modelBuilder.Entity<Review>()

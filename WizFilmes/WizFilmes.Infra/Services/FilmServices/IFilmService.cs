@@ -11,7 +11,8 @@ namespace WizFilmes.Infra.Services.FilmServices
     public interface IFilmService
     {
         Task<FilmDto> CreateFilm(CreateFilmDto createFilmDto);
-        Task<IEnumerable<FilmDto>> GetAllFilms(string? name);
+        //Task<IEnumerable<FilmDto>> GetAllFilms(string? name);
+        Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name);
         Task<FilmDto> GetFilmById(int id);
         Task<bool> UpdateFilm(int id, CreateFilmDto createFilmDto);
         Task<bool> DeleteFilm(int id);
