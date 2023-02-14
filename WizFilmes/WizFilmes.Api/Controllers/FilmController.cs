@@ -17,9 +17,9 @@ namespace WizFilmes.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllFilms(string? name)
+        public async Task<IActionResult> GetAllFilms(int? row, int? page, string? name)
         {
-            var listFilms = await _service.GetAllFilms(name);
+            var listFilms = await _service.GetAllFilms(row, page, name);
             return Ok(listFilms);
         }
 

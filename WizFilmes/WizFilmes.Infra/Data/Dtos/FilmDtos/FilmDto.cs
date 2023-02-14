@@ -34,8 +34,8 @@ namespace WizFilmes.Infra.Data.Dtos.FilmDtos
                     return 0;
                 }
             }
+            set { }
         }
-        [JsonIgnore]
         public virtual IEnumerable<FilmActor> Cast { get; set; }
     }
 }
