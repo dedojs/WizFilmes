@@ -33,9 +33,7 @@ namespace WizFilmes.Infra.Utils
 
             var userClaims = new List<Claim>()
             {
-                new Claim("UserName", user.Name),
-                new Claim("UserEmail", user.Email),
-                new Claim("UserPassword", user.Password)
+                new Claim("UserID", user.Id.ToString()),
             };
 
             claims.AddClaims(userClaims);

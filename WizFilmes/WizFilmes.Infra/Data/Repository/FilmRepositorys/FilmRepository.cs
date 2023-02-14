@@ -37,6 +37,9 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
             if (row == null)
                 row = 10;
 
+            if (row > 20)
+                row = 20;
+
             var count = _context.Films.Count();
             var pages = count / row.Value;
 

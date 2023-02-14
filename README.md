@@ -110,16 +110,15 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 ```
 [
 	{
-		"id": 1,
-		"name": "Aventura",
+		"id": 5,
+		"name": "Comédia",
 		"films": [
-			"Indiana Jones e a Caveira de Cristal",
-			"Tomb Raider",
-			"Mulher Maravilha",
-			"O Senhor dos Anéis 3",
-			"O Senhor dos Anéis",
-			"Superman",
-			"Homem Aranha"
+			{
+				"name": "Oito Mulheres e um segredo",
+				"description": "Filme dos Ocean",
+				"rating": 3.5,
+				"director": "Patty Jenkins"
+			}
 		]
 	}
 ]
@@ -215,9 +214,9 @@ O Projeto foi previamente povoado para faciliar a demonstração.
     * Body:
 ```
 {
-  "actorId": 3,
-	"character": "Peter",
-  "filmId": 14
+    "actorId": 3,
+    "character": "Peter",
+    "filmId": 14
 }
 ```
 * Response:
