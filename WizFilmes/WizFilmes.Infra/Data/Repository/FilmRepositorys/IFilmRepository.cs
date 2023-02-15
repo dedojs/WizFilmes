@@ -12,7 +12,7 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
     {
         Task<Film> CreateFilm(Film film);
         Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name);
-        Task<Film> GetFilmById(int id);
+        Task<FilmeReturnDtoWithActors> GetFilmById(int id);
         Task UpdateFilm(Film film);
         Task DeleteFilm(Film film);
     }

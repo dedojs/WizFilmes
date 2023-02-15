@@ -13,7 +13,7 @@ namespace WizFilmes.Infra.Services.FilmServices
         Task<FilmDto> CreateFilm(CreateFilmDto createFilmDto);
         //Task<IEnumerable<FilmDto>> GetAllFilms(string? name);
         Task<FilmResultDtoCountPages> GetAllFilms(int? row, int? page, string? name);
-        Task<FilmDto> GetFilmById(int id);
+        Task<FilmeReturnDtoWithActors> GetFilmById(int id);
         Task<bool> UpdateFilm(int id, CreateFilmDto createFilmDto);
         Task<bool> DeleteFilm(int id);
     }

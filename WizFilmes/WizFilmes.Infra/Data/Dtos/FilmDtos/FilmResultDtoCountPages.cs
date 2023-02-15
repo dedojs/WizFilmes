@@ -9,8 +9,8 @@ namespace WizFilmes.Infra.Data.Dtos.FilmDtos
 {
     public class FilmResultDtoCountPages
     {
-        public IEnumerable<FilmDto> Films { get; set; }
-        public int Count { get; set; }
-        public int Pages { get; set; }
+        public IEnumerable<FilmeReturnDtoWithActors> Films { get; set; }
+        public double TotalFilms { get; set; }
+        public double TotalPages { get; set; }
     }
 }

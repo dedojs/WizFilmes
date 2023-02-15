@@ -3,6 +3,7 @@ using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Context;
 using WizFilmes.Infra.Data.Dtos.CategoryDtos;
 using WizFilmes.Infra.Data.Dtos.DirectorDtos;
+using WizFilmes.Infra.Data.Dtos.FilmDtos;
 
 namespace WizFilmes.Infra.Data.Repository.ActorRepository
 {
@@ -30,7 +31,14 @@ namespace WizFilmes.Infra.Data.Repository.ActorRepository
                 {
                     Id = d.Id,
                     Name = d.Name,
-                    Films = d.Films.Select(f => f.Name).ToList()
+                    Films = d.Films.Select(f => new FilmDtoDataReturn
+                    {
+                        Name = f.Name,
+                        Description = f.Description,
+                        Rating = f.Rating,
+                        Director = f.Director.Name,
+                        Reviews = f.Reviews.ToList(),
+                    }).ToList()
                 })
                 .ToListAsync();
 
@@ -46,7 +54,14 @@ namespace WizFilmes.Infra.Data.Repository.ActorRepository
                 {
                     Id = d.Id,
                     Name = d.Name,
-                    Films = d.Films.Select(f => f.Name).ToList()
+                    Films = d.Films.Select(f => new FilmDtoDataReturn
+                    {
+                        Name = f.Name,
+                        Description = f.Description,
+                        Rating= f.Rating,
+                        Director = f.Director.Name,
+                        Reviews = f.Reviews.ToList(),
+                    }).ToList()
                 })
                 .ToListAsync();
 

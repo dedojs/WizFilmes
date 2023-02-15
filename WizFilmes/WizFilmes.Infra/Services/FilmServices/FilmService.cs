@@ -33,9 +33,12 @@ namespace WizFilmes.Infra.Services.FilmServices
 
         public async Task<bool> DeleteFilm(int id)
         {
-            var film = await _repository.GetFilmById(id);
-            if (film == null)
+            var filmDto = await _repository.GetFilmById(id);
+
+            if (filmDto == null)
                 return false;
+
+            var film = _mapper.Map<Film>(filmDto);
 
             await _repository.DeleteFilm(film);
             return true;
@@ -45,26 +48,26 @@ namespace WizFilmes.Infra.Services.FilmServices
         {
             var listFilms = await _repository.GetAllFilms(row, page, name);
 
-            var listFilmsDto = listFilms.Film.Select(f => _mapper.Map<FilmDto>(f)).ToList();
-
-            var newListResultDto = new FilmResultDtoCountPages() { Films = listFilmsDto, Count = listFilms.Count, Pages = listFilms.Pages };
+            var newListResultDto = new FilmResultDtoCountPages() { Films = listFilms.Film, TotalFilms = listFilms.TotalFilms, TotalPages = listFilms.TotalPages };
 
             return newListResultDto;
         }
 
-        public async Task<FilmDto> GetFilmById(int id)
+        public async Task<FilmeReturnDtoWithActors> GetFilmById(int id)
         {
             var film = await _repository.GetFilmById(id);
-            var filmDto = _mapper.Map<FilmDto>(film);
-            return filmDto;
+            //var filmDto = _mapper.Map<FilmDto>(film);
+            return film;
         }
 
         public async Task<bool> UpdateFilm(int id, CreateFilmDto createFilmDto)
         {
-            var film = await _repository.GetFilmById(id);
+            var filmDto = await _repository.GetFilmById(id);
 
-            if (film == null)
+            if (filmDto == null)
                 return false;
+
+            var film = _mapper.Map<Film>(filmDto);
 
             var filmUpdate = _mapper.Map(createFilmDto, film);
             
