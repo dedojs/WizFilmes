@@ -38,9 +38,13 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 
 ### 💻 Tecnologias utilizadas
 
-- [.NET 6](https://learn.microsoft.com/pt-br/dotnet/core/whats-new/dotnet-6)
-- [AspNetCore](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0)
-- [Swashbuckle](https://learn.microsoft.com/pt-br/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio): Swaggwer
+- [.NET 6]()
+- [AspNetCore]()
+- [AspNetCore Authentication JwtBearer]()
+- [EntityFrameworkCore]()
+- [AutoMapper]()
+- [SqlServer]()
+- [Swashbuckle](): Swaggwer
 
 -----------------------------------
 
