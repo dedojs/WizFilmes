@@ -103,7 +103,7 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 
 ### 3. Get (Buscar Categoria por Id)
 * Url: `/Category`
-    * Exemplo: `https://localhost:7014/Category/1`
+    * Exemplo: `https://localhost:7014/Category/5`
 
 * Response:
     * StatusCode: 200 OK
@@ -126,24 +126,40 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 
 ### 4. Get (Buscar Diretor por Nome)
 * Url: `/Director`
-    * Exemplo: `https://localhost:7014/Director/Patty`
+    * Exemplo: `https://localhost:7014/Director/stev`
 
 * Response:
     * StatusCode: 200 OK
 ```
 [
 	{
-		"id": 2,
-		"name": "Patty Jenkins",
+		"id": 1,
+		"name": "Steven Spilberg",
 		"films": [
-			"Tomb Raider",
-			"Mulher Maravilha",
-			"Oito Mulheres e um segredo",
-			"O Senhor dos Anéis 3",
-			"O Senhor dos Anéis",
-			"Superman",
-			"Homem Aranha",
-			"Hulk"
+			{
+				"name": "Indiana Jones e a Caveira de Cristal",
+				"description": "Filme do Indiana",
+				"rating": 5,
+				"director": "Steven Spilberg"
+			},
+			{
+				"name": "ET",
+				"description": "Filme do ET",
+				"rating": 0,
+				"director": "Steven Spilberg"
+			},
+			{
+				"name": "Maverick",
+				"description": "Filme do avião",
+				"rating": 3.5,
+				"director": "Steven Spilberg"
+			},
+			{
+				"name": "Exorcista",
+				"description": "Filme do capiroto",
+				"rating": 0,
+				"director": "Steven Spilberg"
+			}
 		]
 	}
 ]
@@ -158,35 +174,24 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 ```
 {
 	"films": [
-    {
-        "id": 14,
-        "name": "Homem Aranha",
-        "description": "quarto ",
-        "year": 2002,
-        "directorId": 2,
-        "categoryId": 1,
-        "reviews": [
-            {
-                "id": 9,
-                "description": "Muito desse filme",
-                "rating": 5,
-                "userId": 2,
-                "filmId": 14
-            }
-        ],
-        "rating": 5,
-        "cast": [
-            {
-                "id": 12,
-                "actorId": 3,
-                "character": "Peter",
-                "filmId": 14
-            }
-        ]
-    }
+		{
+			"id": 14,
+			"name": "Homem Aranha",
+			"description": "quarto ",
+			"year": 2002,
+			"director": "Patty Jenkins",
+			"category": "Aventura",
+			"rating": 5,
+			"cast": [
+				{
+					"name": "Tom Hanks",
+					"character": "Peter"
+				}
+			]
+		}
 	],
-	"count": 13,
-	"pages": 1
+	"totalFilms": 13,
+	"totalPages": 2
 }
 ```
 
@@ -244,16 +249,13 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 			"name": "Oito Mulheres e um segredo",
 			"description": "Filme dos Ocean",
 			"year": 2018,
-			"directorId": 2,
-			"categoryId": 5,
-			"reviews": [],
-			"rating": 0,
+			"director": "Patty Jenkins",
+			"category": "Comédia",
+			"rating": 3.5,
 			"cast": [
 				{
-					"id": 6,
-					"actorId": 6,
-					"character": "Ocean sister",
-					"filmId": 6
+					"name": "Sandra Bullock",
+					"character": "Ocean sister"
 				}
 			]
 		},
@@ -262,9 +264,8 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 			"name": "Exorcista",
 			"description": "Filme do capiroto",
 			"year": 1978,
-			"directorId": 1,
-			"categoryId": 2,
-			"reviews": [],
+			"director": "Steven Spilberg",
+			"category": "Terror",
 			"rating": 0,
 			"cast": []
 		},
@@ -273,37 +274,17 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 			"name": "O Senhor dos Anéis 3",
 			"description": "Terceiro ",
 			"year": 2002,
-			"directorId": 2,
-			"categoryId": 1,
-			"reviews": [
-				{
-					"id": 3,
-					"description": "Não Gostei Muito desse filme",
-					"rating": 4,
-					"userId": 1,
-					"filmId": 9
-				},
-				{
-					"id": 4,
-					"description": "Gostei Muito desse filme",
-					"rating": 5,
-					"userId": 2,
-					"filmId": 9
-				}
-			],
+			"director": "Patty Jenkins",
+			"category": "Aventura",
 			"rating": 4.5,
 			"cast": [
 				{
-					"id": 7,
-					"actorId": 7,
-					"character": "Galadriel",
-					"filmId": 9
+					"name": "Lara Sousa",
+					"character": "Galadriel"
 				},
 				{
-					"id": 8,
-					"actorId": 8,
-					"character": "Gandalf",
-					"filmId": 9
+					"name": "Andre Sousa",
+					"character": "Gandalf"
 				}
 			]
 		},
@@ -312,24 +293,8 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 			"name": "O Senhor dos Anéis",
 			"description": "primeiro",
 			"year": 2002,
-			"directorId": 2,
-			"categoryId": 1,
-			"reviews": [
-				{
-					"id": 5,
-					"description": "Gostei Muito desse filme",
-					"rating": 4,
-					"userId": 1,
-					"filmId": 10
-				},
-				{
-					"id": 6,
-					"description": "Gostei Muito desse filme",
-					"rating": 3,
-					"userId": 2,
-					"filmId": 10
-				}
-			],
+			"director": "Patty Jenkins",
+			"category": "Aventura",
 			"rating": 3.5,
 			"cast": []
 		},
@@ -337,50 +302,28 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 			"id": 12,
 			"name": "O Senhor das Armas",
 			"description": "Filme de traficante de armas",
-			"year": 2002,
-			"directorId": 3,
-			"categoryId": 4,
-			"reviews": [
-				{
-					"id": 7,
-					"description": "Gostei Muito desse filme",
-					"rating": 3,
-					"userId": 1,
-					"filmId": 12
-				},
-				{
-					"id": 8,
-					"description": "Muito desse filme",
-					"rating": 5,
-					"userId": 2,
-					"filmId": 12
-				}
-			],
+			"year": 2000,
+			"director": "Arleidson Sousas",
+			"category": "Ação",
 			"rating": 4,
 			"cast": [
 				{
-					"id": 9,
-					"actorId": 1,
-					"character": "Gandalf",
-					"filmId": 12
+					"name": "Harison Ford",
+					"character": "Gandalf"
 				},
 				{
-					"id": 10,
-					"actorId": 2,
-					"character": "Gandalf",
-					"filmId": 12
+					"name": "Tom Cruise",
+					"character": "Gandalf"
 				},
 				{
-					"id": 11,
-					"actorId": 3,
-					"character": "Gandalf",
-					"filmId": 12
+					"name": "Tom Hanks",
+					"character": "Gandalf"
 				}
 			]
 		}
 	],
-	"count": 12,
-	"pages": 2
+	"totalFilms": 13,
+	"totalPages": 3
 }
 ```
 

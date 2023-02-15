@@ -17,6 +17,7 @@ namespace WizFilmes.Infra.Profiles
             CreateMap<CreateFilmDto, Film>();
             CreateMap<FilmDto, Film>();
             CreateMap<Film, FilmDto>();
+            CreateMap<FilmeReturnDtoWithActors, Film>();
         }
     }
 }
