@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Dtos.FilmDtos;
 using WizFilmes.Infra.Services.FilmServices;
@@ -17,9 +18,9 @@ namespace WizFilmes.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllFilms(int? row, int? page, string? name)
+        public async Task<IActionResult> GetAllFilms(int? row, int? page, string? name, string? category, string? director)
         {
-            var listFilms = await _service.GetAllFilms(row, page, name);
+            var listFilms = await _service.GetAllFilms(row, page, name, category, director);
             return Ok(listFilms);
         }
 
@@ -37,6 +38,7 @@ namespace WizFilmes.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateFilm([FromBody] CreateFilmDto createFilmDto)
         {
+            
             if (createFilmDto == null)
                 return BadRequest("Dados inválidos");
 
@@ -63,6 +65,7 @@ namespace WizFilmes.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteFilm(int id)
         {
             var film = await _service.DeleteFilm(id);

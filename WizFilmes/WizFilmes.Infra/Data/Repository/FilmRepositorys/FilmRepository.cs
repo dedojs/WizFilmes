@@ -2,7 +2,6 @@
 using System.Xml.Linq;
 using WizFilmes.Domain.Models;
 using WizFilmes.Infra.Data.Context;
-using WizFilmes.Infra.Data.Dtos.ActorDtos;
 using WizFilmes.Infra.Data.Dtos.FilmDtos;
 
 namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
@@ -16,11 +15,12 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
             _context = context;
         }
 
-        public async Task<Film> CreateFilm(Film film)
+        public async Task<Film> CreateFilm(Film createfilm)
         {
-            _context.Films.Add(film);
+            _context.Films.Add(createfilm);
             await _context.SaveChangesAsync();
-            return film;
+            
+            return createfilm;
         }
 
         public async Task DeleteFilm(Film film)
@@ -29,7 +29,13 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
             await _context.SaveChangesAsync();
         }
 
-        public async Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name)
+        public async Task<IEnumerable<Film>> GetAll()
+        {
+            var list = await _context.Films.ToListAsync();
+            return list;
+        }
+
+        public async Task<FilmResultDto> GetAllFilms(int? row, int? page, string? name, string? category, string? director)
         {
             if (page == null)
                 page = 1;
@@ -44,17 +50,27 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
 
             double pages = Math.Ceiling(count / row.Value);
 
-            var listFilms = await _context.Films
+            var query = _context.Films.AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(f => f.Name.ToLower().Contains(name.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                query = query.Where(f => f.Category.Name.ToLower() == category);
+            }
+
+            if (!string.IsNullOrEmpty(director))
+            {
+                query = query.Where(f => f.Director.Name.ToLower().Contains(director.ToLower()));
+            }
+
+            var listFilms = await query
                 .Skip((page.Value - 1) * row.Value)
                 .Take(row.Value)
                 .ToListAsync();
-
-            if (!string.IsNullOrEmpty(name))
-                listFilms = await _context.Films
-                    .Where(f => f.Name.ToLower().Contains(name.ToLower()))
-                    .Skip((page.Value - 1) * row.Value)
-                    .Take(row.Value)
-                    .ToListAsync();
 
             var newList = listFilms.Select(f => new FilmeReturnDtoWithActors
             {
@@ -62,18 +78,23 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
                 Name = f.Name,
                 Description = f.Description,
                 Reviews = f.Reviews,
-                Category = f.Category.Name,
-                Director = f.Director.Name,
+                Category = f.Category,
+                Director = f.Director,
                 Year = f.Year,
                 Rating = f.Rating,
                 Cast = f.Cast.Select(fa => new FilmDtoActorCharacter
                 {
                     Name = fa.Actor.Name,
                     Character = fa.Character
-                }),
-            });
+                }).ToList(),
+            }).ToList();
 
-            var newFilmResutDto = new FilmResultDto { Film = newList, TotalFilms = count, TotalPages = pages };
+            var newFilmResutDto = new FilmResultDto
+            { 
+                Film = newList,
+                TotalFilms = count,
+                TotalPages = pages
+            };
 
             return newFilmResutDto;
             
@@ -82,7 +103,7 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
         public async Task<FilmeReturnDtoWithActors> GetFilmById(int id)
         {
             var film = await _context.Films
-                    .FirstOrDefaultAsync(i => i.Id == id);
+                .FirstOrDefaultAsync(i => i.Id == id);
 
             if (film == null)
                 return null;
@@ -93,8 +114,8 @@ namespace WizFilmes.Infra.Data.Repository.FilmRepositorys
                 Name = film.Name,
                 Description = film.Description,
                 Reviews = film.Reviews,
-                Category = film.Category.Name,
-                Director = film.Director.Name,
+                Category = film.Category,
+                Director = film.Director,
                 Year = film.Year,
                 Rating = film.Rating,
                 Cast = film.Cast.Select(fa => new FilmDtoActorCharacter
