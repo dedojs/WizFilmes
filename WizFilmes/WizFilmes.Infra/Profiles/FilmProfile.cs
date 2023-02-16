@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WizFilmes.Domain.Models;
-using WizFilmes.Infra.Data.Dtos.ActorDtos;
 using WizFilmes.Infra.Data.Dtos.FilmDtos;
 
 namespace WizFilmes.Infra.Profiles
@@ -18,6 +12,7 @@ namespace WizFilmes.Infra.Profiles
             CreateMap<FilmDto, Film>();
             CreateMap<Film, FilmDto>();
             CreateMap<FilmeReturnDtoWithActors, Film>();
+            CreateMap<Film, FilmeReturnDtoWithActors>();
         }
     }
 }

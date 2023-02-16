@@ -169,9 +169,18 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 ]
 ```
 
-### 5. Get (Buscar Filme por Nome)
+### 5. Get (Buscar Filme por Nome, Diretor e Categoria)
+Nessa rota é possível filtrar os filmes por nome, categoria e diretor.
+Passando os parâmetros desejado na rota.
+
+nane = Nome do filme (Parcial)
+
+director = Nome do diretor (Parcial)
+
+category = Nome da categoria (Exato)
+
 * Url: `/Film`
-    * Exemplo: `https://localhost:7014/Film?name=aranha`
+    * Exemplo: `https://localhost:7014/Film?director=steven&category=aventura&name=Indi`
 
 * Response:
     * StatusCode: 200 OK
@@ -179,22 +188,22 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 {
 	"films": [
 		{
-			"id": 14,
-			"name": "Homem Aranha",
-			"description": "quarto ",
-			"year": 2002,
-			"director": "Patty Jenkins",
+			"id": 1,
+			"name": "Indiana Jones e a Caveira de Cristal",
+			"description": "Filme do Indiana",
+			"year": 1980,
+			"director": "Steven Spilberg",
 			"category": "Aventura",
 			"rating": 5,
 			"cast": [
 				{
-					"name": "Tom Hanks",
-					"character": "Peter"
+					"name": "Harison Ford",
+					"character": "Jiraya"
 				}
 			]
 		}
 	],
-	"totalFilms": 13,
+	"totalFilms": 14,
 	"totalPages": 2
 }
 ```
@@ -240,6 +249,11 @@ O Projeto foi previamente povoado para faciliar a demonstração.
 ```
 
 ### 8. Get (Retornar todos os filmes de forma paginada)
+
+row = Quantidade de filmes a retornar por página.
+
+page = Página escolhida
+
 * Url: `/Film`
     * Exemplo: `https://localhost:7014/Film?row=5&page=2`
 

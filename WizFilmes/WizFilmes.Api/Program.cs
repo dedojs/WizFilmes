@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WizFilmes.Infra.Data.Context;
 using WizFilmes.Infra.Data.Repository.ActorRepository;
 using WizFilmes.Infra.Data.Repository.DirectorRepository;
@@ -14,6 +17,7 @@ using WizFilmes.Infra.Services.FilmServices;
 using WizFilmes.Infra.Services.LoginServices;
 using WizFilmes.Infra.Services.ReviewServices;
 using WizFilmes.Infra.Services.UserServices;
+using WizFilmes.Infra.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +52,26 @@ builder.Services.AddScoped<IFilmActorService, FilmActorService>();
 // Add Mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//Adicionando Autenticação e Autorização
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenConstants.Secret))
+    };
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -63,6 +87,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Adicionar uso de autenticação
+app.UseAuthentication();
+
+// Adicionar uso de autorização
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
